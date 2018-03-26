@@ -65,6 +65,8 @@ local function AskQuestion()
 
 
 	elseif randomOperator == 3 then
+		randomNumber1 = math.random (1, 10)
+		randomNumber2 = math.random (1, 10)
 		correctAnswer = randomNumber1 * randomNumber2
 		questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
     end 
