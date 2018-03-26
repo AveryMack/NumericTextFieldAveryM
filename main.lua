@@ -58,14 +58,17 @@ local function AskQuestion()
 	elseif randomOperator == 2 then 
 		correctAnswer = randomNumber1 - randomNumber2
 		questionObject.text = randomNumber1 .. " - " .. randomNumber2 ..  " = " 
-		
+		if (correctAnswer < 0) then
+			correctAnswer = randomNumber2 - randomNumber1
+		questionObject.text = randomNumber2 .. " - " .. randomNumber1 ..  " = " 
+	end
+
 
 	elseif randomOperator == 3 then
 		correctAnswer = randomNumber1 * randomNumber2
 		questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
     end 
-
-end 
+end
 
 local function HideCorrect()
 	correctObject.isVisible = false 
@@ -83,9 +86,7 @@ local function NumericFieldListener(event)
 	-- User begins editing "numericField"
 	if ( event.phase == "began" ) then 
 
-		-- clear text field 
-		event.target.text = ""
-
+		
 		elseif event.phase == "submitted" then
 
 			-- when the answer is submitted (enter key is pressed) set user input to user's answer
@@ -100,9 +101,11 @@ local function NumericFieldListener(event)
 			else incorrectObject.isVisible = true 
 				timer.performWithDelay(1500, HideIncorrect)
 			end		
-		end
-	end 
+		-- clear text field 
+		event.target.text = ""
 
+	end 
+end
 
 
 -----------------------------------------------------------------------------------
